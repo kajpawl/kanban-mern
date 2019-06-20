@@ -4,6 +4,7 @@ import uuid from 'uuid';
 
 export function addNote(req, res) {
   const { note, laneId } = req.body;
+  console.log(`Server: note controller - add note ${note.task} and laneId ${laneId}`)
 
   if (!note || !note.task || !laneId) {
     res.status(400).end();

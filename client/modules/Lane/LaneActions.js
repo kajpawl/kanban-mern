@@ -62,7 +62,9 @@ export function createLanes(lanesData) {
 }
 
 export function createLaneRequest(lane) {
+  console.log('Before creating lane ' + lane);
   return (dispatch) => {
+    console.log('After creating lane ' + lane);
     return callApi('lanes', 'post', lane).then(res => {
       dispatch(createLane(res));
     });
@@ -70,9 +72,10 @@ export function createLaneRequest(lane) {
 }
 
 export function deleteLaneRequest(laneId) {
-  console.log('Deleting lane ' + laneId);
+  console.log('Before deleting lane ' + laneId);
   return (dispatch) => {
-    return callApi('lanes/' + laneId, 'delete', laneId).then(() => {
+  console.log('After deleting lane ' + laneId);
+    return callApi(`lanes/${laneId}`, 'delete').then(() => {
       dispatch(deleteLane(laneId));
     });
   };

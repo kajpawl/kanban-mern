@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import styles from './Note.css';
 
 const Note = props =>
-  <li className={styles.Note}>{props.children}</li>;
+  <li id={props.id} className={styles.Note}>{props.children}</li>;
 
 Note.propTypes = {
   children: PropTypes.any,

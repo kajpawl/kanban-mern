@@ -12,7 +12,7 @@ const Lane = props => {
     <div className={styles.Lane}>
       <div className={styles.LaneHeader}>
         <div className={styles.LaneAddNote}>
-          <button onClick={() => addNote({task: 'New Note'}, laneId)}>Add Note</button>
+          <button onClick={() => addNote({"task": "New Note"}, laneId)}>Add Note</button>
         </div>
         <Edit
           className={styles.LaneName}

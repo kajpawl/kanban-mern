@@ -17,8 +17,9 @@ export function createNote(note, laneId) {
 }
 
 export function createNoteRequest(note, laneId) {
-  console.log('creating note ' + note + ' & laneId is ' + laneId);
+  console.log('Before creating note ' + note.task + ' & laneId is ' + laneId);
   return (dispatch) => {
+  console.log('After creating note ' + note.task + ' & laneId is ' + laneId);
     return callApi('notes', 'post', { note, laneId }).then(noteResp => {
       dispatch(createNote(noteResp, laneId));
     });
@@ -49,8 +50,9 @@ export function deleteNote(noteId, laneId) {
 }
 
 export function deleteNoteRequest(noteId, laneId) {
-  console.log('deleting ' + noteId, laneId);
+  console.log('Before deleting note ' + noteId, laneId);
   return (dispatch) => {
+  console.log('After deleting note ' + noteId, laneId);
     return callApi('notes/' + noteId, 'delete', { noteId, laneId }).then(() => {
       dispatch(deleteNote(noteId, laneId));
     });
