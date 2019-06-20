@@ -1,4 +1,5 @@
 import Lane from '../models/lane';
+import Note from '../models/note';
 import uuid from 'uuid';
 
 export function addLane(req, res) {
@@ -33,6 +34,13 @@ export function deleteLane(req, res) {
     if (err) {
       res.status(500).send(err);
     }
+
+    lane.notes.map(note => {
+      return Note.findOneAndRemove({ id: note.id }, function(err) {
+        if (err) throw err;
+        console.log('Note deleted!');
+      });
+    });
 
     lane.remove(() => {
       res.status(200).end();

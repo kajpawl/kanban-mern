@@ -10,19 +10,18 @@ const initialState = {};
 export default function lanes(state = initialState, action) {
   switch (action.type) {
     case CREATE_LANE:
-      return { ...state, [action.lane.id]: action.lane };
-
     case UPDATE_LANE:
       return { ...state, [action.lane.id]: action.lane };
 
     case EDIT_LANE:
-      const lane = { ...state[action.id], editing: true };
-      return { ...state, [action.id]: lane };
+      const lane = { ...state[action.lane], editing: true };
+      return { ...state, [action.lane]: lane };
 
     case CREATE_LANES:
       return { ...action.lanes };
 
     case DELETE_NOTE: {
+      console.log(action);
       const newLane = { ...state[action.laneId] };
       newLane.notes = newLane.notes.filter(noteId => noteId !== action.noteId);
       return { ...state, [action.laneId]: newLane };
@@ -37,8 +36,6 @@ export default function lanes(state = initialState, action) {
     case DELETE_LANE: {
       return omit(state, action.laneId);
     }
-
-
 
     default:
       return state;

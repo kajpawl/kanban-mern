@@ -6,7 +6,7 @@ const Lanes = ({ lanes }) => {
   return (
     <div className="lanes">
       {lanes.map(lane =>
-        <Lane className="lane" key={lane.id} lane={lane} />
+        <Lane className="lane" id={lane.id} key={lane.id} lane={lane} />
       )}
     </div>
   );

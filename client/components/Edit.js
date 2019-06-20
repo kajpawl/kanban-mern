@@ -17,8 +17,12 @@ export default class Edit extends Component {
   }
 
   renderDelete = () => {
-    return <button className={styles.delete} onClick={() => {console.log('test'); this.props.onDelete()}
-  }>x</button>
+    return (
+      <button className={styles.delete} 
+        onClick={() => {this.props.onDelete()}
+        }>x
+      </button>
+    );
   }
 
   renderValue = () => {

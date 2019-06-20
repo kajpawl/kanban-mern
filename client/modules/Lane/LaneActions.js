@@ -22,34 +22,10 @@ export function createLane(lane) {
   };
 }
 
-export function updateLane(lane) {
-  return {
-    type: UPDATE_LANE,
-    lane,
-  };
-}
-
-export function deleteLane(laneId) {
-  return {
-    type: DELETE_LANE,
-    laneId,
-  };
-}
-
-export function editLane(lane) {
-  return {
-    type: EDIT_LANE,
-    lane,
-  };
-}
-
-export function fetchLanes() {
+export function createLaneRequest(lane) {
   return (dispatch) => {
-    return callApi('lanes').then(res => {
-      const normalized = normalize(res.lanes, lanes);
-      const { lanes: normalizedLanes, notes } = normalized.entities;
-      dispatch(createLanes(normalizedLanes));
-      dispatch(createNotes(notes));
+    return callApi('lanes', 'post', lane).then(res => {
+      dispatch(createLane(res));
     });
   };
 }
@@ -61,30 +37,50 @@ export function createLanes(lanesData) {
   };
 }
 
-export function createLaneRequest(lane) {
-  console.log('Before creating lane ' + lane);
+export function editLane(lane) {
+  return {
+    type: EDIT_LANE,
+    lane,
+  };
+}
+
+export function updateLane(lane) {
+  return {
+    type: UPDATE_LANE,
+    lane,
+  };
+}
+
+export function updateLaneRequest(lane) {
   return (dispatch) => {
-    console.log('After creating lane ' + lane);
-    return callApi('lanes', 'post', lane).then(res => {
-      dispatch(createLane(res));
+    return callApi('lanes/' + [lane.id], 'put', { id: lane.id, name: lane.name }).then(res => {
+      dispatch(updateLane(lane));
     });
   };
 }
 
+export function deleteLane(laneId) {
+  return {
+    type: DELETE_LANE,
+    laneId,
+  };
+}
+
 export function deleteLaneRequest(laneId) {
-  console.log('Before deleting lane ' + laneId);
   return (dispatch) => {
-  console.log('After deleting lane ' + laneId);
     return callApi(`lanes/${laneId}`, 'delete').then(() => {
       dispatch(deleteLane(laneId));
     });
   };
 }
 
-export function updateLaneRequest(lane) {
+export function fetchLanes() {
   return (dispatch) => {
-    return callApi('lanes' + [lane.id], 'put', lane).then(res => {
-      dispatch(updateLane(lane));
+    return callApi('lanes').then(res => {
+      const normalized = normalize(res.lanes, lanes);
+      const { lanes: normalizedLanes, notes } = normalized.entities;
+      dispatch(createLanes(normalizedLanes));
+      dispatch(createNotes(notes));
     });
   };
 }

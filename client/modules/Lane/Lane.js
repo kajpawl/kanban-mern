@@ -7,12 +7,15 @@ import styles from './Lane.css';
 const Lane = props => {
   const { lane, laneNotes, updateLane, addNote, deleteLane, editLane, deleteNote } = props;
   const laneId = lane.id;
+  const insertNoteTask = () => {
+    return window.prompt("Add new note", "New Note");
+  };
 
   return (
     <div className={styles.Lane}>
       <div className={styles.LaneHeader}>
         <div className={styles.LaneAddNote}>
-          <button onClick={() => addNote({"task": "New Note"}, laneId)}>Add Note</button>
+          <button onClick={() => addNote({task: insertNoteTask()}, laneId)}>Add Note</button>
         </div>
         <Edit
           className={styles.LaneName}

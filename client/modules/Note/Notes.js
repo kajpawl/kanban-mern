@@ -12,9 +12,7 @@ const Notes = ({ notes, laneId, editNote, updateNote, deleteNote }) => {
         <Note 
           id={note.id}
           key={note.id}
-          editing={note.editing}
         >
-        {console.log('Notes.js: note.id + laneId ' + note.id, laneId)}
         <Edit
           editing={note.editing}
           value={note.task}
