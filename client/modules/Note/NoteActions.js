@@ -17,6 +17,7 @@ export function createNote(note, laneId) {
 }
 
 export function createNoteRequest(note, laneId) {
+  console.log('creating note ' + note + ' & laneId is ' + laneId);
   return (dispatch) => {
     return callApi('notes', 'post', { note, laneId }).then(noteResp => {
       dispatch(createNote(noteResp, laneId));
@@ -31,11 +32,28 @@ export function updateNote(note) {
   };
 }
 
+export function updateNoteRequest(note) {
+  return (dispatch) => {
+    return callApi('notes/' + [note.id], 'put', { note }).then(noteResp => {
+      dispatch(updateNote(note));
+    });
+  };
+}
+
 export function deleteNote(noteId, laneId) {
   return {
     type: DELETE_NOTE,
     noteId,
     laneId,
+  };
+}
+
+export function deleteNoteRequest(noteId, laneId) {
+  console.log('deleting ' + noteId, laneId);
+  return (dispatch) => {
+    return callApi('notes/' + noteId, 'delete', { noteId, laneId }).then(() => {
+      dispatch(deleteNote(noteId, laneId));
+    });
   };
 }
 
@@ -52,20 +70,3 @@ export function createNotes(notesData) {
     notes: notesData,
   };
 }
-
-export function deleteNoteRequest(noteId, laneId) {
-  return (dispatch) => {
-    return callApi('notes/' + noteId, 'delete', { noteId, laneId }).then(noteResp => {
-      dispatch(deleteNote(noteResp, laneId));
-    });
-  };
-}
-
-export function updateNoteRequest(note) {
-  return (dispatch) => {
-    return callApi('notes/' + [note.id], 'put', { note }).then(noteResp => {
-      dispatch(updateNote(noteResp));
-    });
-  };
-}
-

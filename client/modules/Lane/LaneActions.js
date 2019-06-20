@@ -64,15 +64,16 @@ export function createLanes(lanesData) {
 export function createLaneRequest(lane) {
   return (dispatch) => {
     return callApi('lanes', 'post', lane).then(res => {
-      dispatch(createLanes(res));
+      dispatch(createLane(res));
     });
   };
 }
 
 export function deleteLaneRequest(laneId) {
+  console.log('Deleting lane ' + laneId);
   return (dispatch) => {
-    return callApi('lanes/' + laneId, 'delete', laneId).then(res => {
-      dispatch(deleteLane(res));
+    return callApi('lanes/' + laneId, 'delete', laneId).then(() => {
+      dispatch(deleteLane(laneId));
     });
   };
 }
@@ -80,7 +81,7 @@ export function deleteLaneRequest(laneId) {
 export function updateLaneRequest(lane) {
   return (dispatch) => {
     return callApi('lanes' + [lane.id], 'put', lane).then(res => {
-      dispatch(updateLane(res));
+      dispatch(updateLane(lane));
     });
   };
 }
