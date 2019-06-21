@@ -6,6 +6,7 @@ export const UPDATE_NOTE = 'UPDATE_NOTE';
 export const DELETE_NOTE = 'DELETE_NOTE';
 export const EDIT_NOTE = 'EDIT_NOTE';
 export const CREATE_NOTES = 'CREATE_NOTES';
+export const MOVE_WITH_LANE = 'MOVE_WITH_LANE';
 
 // Export Actions
 export function createNote(note, laneId) {
@@ -68,5 +69,14 @@ export function createNotes(notesData) {
   return {
     type: CREATE_NOTES,
     notes: notesData,
+  };
+}
+
+export function moveWithLane(laneId, targetId, sourceId) {
+  return {
+    type: MOVE_WITH_LANE,
+    laneId,
+    targetId,
+    sourceId,
   };
 }
