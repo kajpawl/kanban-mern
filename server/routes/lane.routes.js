@@ -15,4 +15,10 @@ router.route('/lanes/:laneId').delete(LaneController.deleteLane);
 // Change Lane's name by laneId
 router.route('/lanes/:laneId').put(LaneController.updateLane);
 
+// Move notes between lanes
+router.route('/movenote').put(LaneController.moveNotesBetweenLanes);
+
+// Change order of notes within a line
+router.route('/updateorder').put(LaneController.updateNotesOrder);
+
 export default router;

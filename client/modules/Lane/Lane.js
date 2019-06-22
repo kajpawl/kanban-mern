@@ -5,14 +5,15 @@ import NotesContainer from '../Note/NotesContainer';
 import Edit from '../../components/Edit';
 import styles from './Lane.css';
 
-class Lane extends React.component {
+class Lane extends React.Component {
   constructor(props) {
     super(props);
     this.props = props;
   }
 
+
   render() {
-    const { connectDropTarget, lane, laneNotes, updateLane, addNote, deleteLane, editLane, deleteNote } = props;
+    const { connectDropTarget, lane, laneNotes, updateLane, addNote, deleteLane, editLane, deleteNote } = this.props;
     const laneId = lane.id;
     const insertNoteTask = () => {
       return window.prompt("Add new note", "New Note");

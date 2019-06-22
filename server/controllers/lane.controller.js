@@ -57,10 +57,61 @@ export function updateLane(req, res) {
   //   const newName = req.body.name;
   //   lane.name = newName;
   // })
+  console.log('Lane updated');
   Lane.update({ id: req.params.laneId }, req.body).exec((err, lane) => {
-        if (err) {
+    if (err) {
       res.status(500).send(err);
     }
     res.json(lane);
   });
 }
+
+export function moveNotesBetweenLanes(req, res) {
+  console.log('moveNotesBetweenLanes');
+  console.log(req.body);
+  const { targetLaneId, noteId, sourceLaneId } = req.body;
+  Note.findOne({ id: noteId }).exec((err, movedNote) => {
+    Lane.findOne({ id: sourceLaneId }).exec((err, sourceLane) => {
+      console.log(sourceLane);
+      console.log(movedNote);
+      sourceLane.notes.pull(movedNote);
+      sourceLane.save();
+    })
+      .then(Lane.findOne({ id: targetLaneId }).exec((err, targetLane) => {
+        targetLane.notes.push(movedNote);
+        targetLane.save();
+      }))
+        .then(res.status(200).end());
+  });
+
+}
+
+export function updateNotesOrder(req, res) {
+  const { laneId, targetId, sourceId } = req.body;
+  Lane.findOne({ id: laneId }).exec((err, lane) => {
+    Note.findOne({ id: targetId }).exec((err, targetNote) => {
+      Note.findOne({ id: sourceId }).exec((err, sourceNote) => {
+
+        console.log(lane);
+        console.log(lane.notes);
+        console.log(targetNote);
+        console.log(sourceNote);
+        const sourceIndex = 3;
+        const targetIndex = 0;
+        console.log(sourceIndex);
+        console.log(lane.notes.indexOf(sourceNote));
+        console.log(targetIndex);
+        console.log(lane.notes.indexOf(targetNote));
+        // const newNotesOrder = [...lane.notes];
+        const newOrder = lane.notes.splice(targetIndex, 0, lane.notes.splice(sourceIndex, 1)[0]);
+    // lane.notes
+    // newNotesOrder.splice(targetIndex, 0, newNotesOrder.splice(sourceIndex, 1)[0]);
+      }).then(() => {
+        lane.notes = newOrder;
+        lane.save();
+      })
+    });
+  })
+    .then(res.status(200).end());
+}
+

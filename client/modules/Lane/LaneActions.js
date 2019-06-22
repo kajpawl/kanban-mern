@@ -87,6 +87,7 @@ export function fetchLanes() {
 }
 
 export function moveBetweenLanes(targetLaneId, noteId, sourceLaneId) {
+  moveBetweenLanesRequest(targetLaneId, noteId, sourceLaneId);
   return {
     type: MOVE_BETWEEN_LANES,
     targetLaneId,
@@ -94,3 +95,8 @@ export function moveBetweenLanes(targetLaneId, noteId, sourceLaneId) {
     sourceLaneId,
   };
 }
+
+export function moveBetweenLanesRequest(targetLaneId, noteId, sourceLaneId) {
+  return callApi('movenote', 'put', { targetLaneId, noteId, sourceLaneId });
+}
+

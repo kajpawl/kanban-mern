@@ -5,21 +5,18 @@ import { compose } from 'redux';
 import ItemTypes from '../Kanban/itemTypes';
 import styles from './Note.css';
 
-export class Note extends React.Component {
-  constructor(props) {
-    super(props);
-    this.props = props;
-  }
+class Note extends React.Component {
   render() {
-    const { connectDragSource, connectDropTarget, isDragging, editing, children, id } = this.props;
+    const { connectDragSource, connectDropTarget, isDragging, endDrag, editing, children, id } = this.props;
     const dragSource = editing ? a => a : connectDragSource;
 
     return dragSource(connectDropTarget(
       <li className={styles.Note}
         id={id}
         style={{
-          opacity: isDragging ? 0 : 1
-        }} >
+          // opacity: isDragging ? 0 : 1,
+        }} 
+      >
         {children}
       </li>
     ));
@@ -28,6 +25,31 @@ export class Note extends React.Component {
 
 Note.propTypes = {
   children: PropTypes.any,
+};
+
+const noteSource = {
+  beginDrag(props) {
+    return {
+      id: props.id,
+      laneId: props.laneId,
+    };
+  },
+  isDragging(props, monitor) {
+    return props.id === monitor.getItem().id;
+  },
+};
+
+const noteTarget = {
+  hover(targetProps, monitor) {
+    const sourceProps = monitor.getItem();
+    if (targetProps.id !== sourceProps.id) {
+      targetProps.moveWithinLane(targetProps.laneId, targetProps.id, sourceProps.id);
+    };
+  },
+  drop(props, monitor) {
+
+    // CALL SERVER HERE
+  }
 };
 
 export default compose(
@@ -39,24 +61,3 @@ export default compose(
     connectDropTarget: connect.dropTarget()
   }))
 )(Note);
-
-const noteSource = {
-  beginDrag(props) {
-    return {
-      id: props.id,
-      laneId: props.laneId,
-    };
-  },
-  isDragging(props, monitor) {
-    return props.id === monitor.getItem().id;
-  }
-};
-
-const noteTarget = {
-  hover(targetProps, monitor) {
-    const sourceProps = monitor.getItem();
-    if (targetProps.id !== sourceProps.id) {
-      targetProps.moveWithLane(targetProps.laneId, targetProps.id, sourceProps.id);
-    }
-  }
-};

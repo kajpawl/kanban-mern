@@ -3,3 +3,9 @@
 .AddLane {
   color: #000;
 }
+
+.Lane {
+	padding: 20px;
+	width: 30%;
+	height: 200px;
+}
