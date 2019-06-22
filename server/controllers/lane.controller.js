@@ -96,19 +96,21 @@ export function updateNotesOrder(req, res) {
         console.log(lane.notes);
         console.log(targetNote);
         console.log(sourceNote);
-        const sourceIndex = 3;
-        const targetIndex = 0;
+
+        const sourceIndex = lane.notes.indexOf(sourceNote);
+        const targetIndex = lane.notes.indexOf(targetNote);
+
         console.log(sourceIndex);
         console.log(lane.notes.indexOf(sourceNote));
         console.log(targetIndex);
         console.log(lane.notes.indexOf(targetNote));
         // const newNotesOrder = [...lane.notes];
-        const newOrder = lane.notes.splice(targetIndex, 0, lane.notes.splice(sourceIndex, 1)[0]);
+        // const newOrder = lane.notes.splice(targetIndex, 0, lane.notes.splice(sourceIndex, 1)[0]);
     // lane.notes
     // newNotesOrder.splice(targetIndex, 0, newNotesOrder.splice(sourceIndex, 1)[0]);
-      }).then(() => {
-        lane.notes = newOrder;
-        lane.save();
+      // }).then(() => {
+      //   lane.notes = newOrder;
+      //   lane.save();
       })
     });
   })

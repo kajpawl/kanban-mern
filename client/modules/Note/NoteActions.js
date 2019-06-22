@@ -72,9 +72,6 @@ export function createNotes(notesData) {
 
 export function moveWithinLane(laneId, targetId, sourceId) {
   moveWithinLaneRequest(laneId, targetId, sourceId);
-  console.log(laneId);
-  console.log(targetId);
-  console.log(sourceId);
   return {
     type: MOVE_WITHIN_LANE,
     laneId,

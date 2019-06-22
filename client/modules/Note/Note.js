@@ -45,10 +45,6 @@ const noteTarget = {
     if (targetProps.id !== sourceProps.id) {
       targetProps.moveWithinLane(targetProps.laneId, targetProps.id, sourceProps.id);
     };
-  },
-  drop(props, monitor) {
-
-    // CALL SERVER HERE
   }
 };
 
