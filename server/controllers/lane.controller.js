@@ -38,7 +38,7 @@ export function deleteLane(req, res) {
     lane.notes.map(note => {
       return Note.findOneAndRemove({ id: note.id }, function(err) {
         if (err) throw err;
-        console.log('Note deleted!');
+        // console.log('Note deleted!');
       });
     });
 
@@ -57,7 +57,7 @@ export function updateLane(req, res) {
   //   const newName = req.body.name;
   //   lane.name = newName;
   // })
-  console.log('Lane updated');
+  // console.log('Lane updated');
   Lane.update({ id: req.params.laneId }, req.body).exec((err, lane) => {
     if (err) {
       res.status(500).send(err);
@@ -72,8 +72,8 @@ export function moveNotesBetweenLanes(req, res) {
   const { targetLaneId, noteId, sourceLaneId } = req.body;
   Note.findOne({ id: noteId }).exec((err, movedNote) => {
     Lane.findOne({ id: sourceLaneId }).exec((err, sourceLane) => {
-      console.log(sourceLane);
-      console.log(movedNote);
+      // console.log(sourceLane);
+      // console.log(movedNote);
       sourceLane.notes.pull(movedNote);
       sourceLane.save();
     })
@@ -91,29 +91,28 @@ export function updateNotesOrder(req, res) {
   Lane.findOne({ id: laneId }).exec((err, lane) => {
     Note.findOne({ id: targetId }).exec((err, targetNote) => {
       Note.findOne({ id: sourceId }).exec((err, sourceNote) => {
-
-        console.log(lane);
-        console.log(lane.notes);
-        console.log(targetNote);
-        console.log(sourceNote);
-
-        const sourceIndex = lane.notes.indexOf(sourceNote);
-        const targetIndex = lane.notes.indexOf(targetNote);
-
-        console.log(sourceIndex);
-        console.log(lane.notes.indexOf(sourceNote));
-        console.log(targetIndex);
-        console.log(lane.notes.indexOf(targetNote));
-        // const newNotesOrder = [...lane.notes];
-        // const newOrder = lane.notes.splice(targetIndex, 0, lane.notes.splice(sourceIndex, 1)[0]);
-    // lane.notes
-    // newNotesOrder.splice(targetIndex, 0, newNotesOrder.splice(sourceIndex, 1)[0]);
-      // }).then(() => {
-      //   lane.notes = newOrder;
-      //   lane.save();
-      })
+        let newNotes = [];
+        // console.log(lane);
+        // console.log(targetNote);
+        // console.log(sourceNote);
+        // console.log(lane.notes.length);
+        for (let i = 0; i < lane.notes.length; i++) {
+          console.log('iterating');
+          if (lane.notes[i].id == targetId) {
+            newNotes.push(sourceNote, lane.notes[i]);
+          }
+          else if (lane.notes[i].id == sourceId) {
+            console.log('Here is the moved note');
+          }
+          else {
+            newNotes.push(lane.notes[i]);
+          }
+        };
+        // console.log('\n\n\n' + newNotes + '\n\n\n');
+        lane.notes = newNotes;
+        lane.save();
+      });
     });
   })
     .then(res.status(200).end());
 }
-

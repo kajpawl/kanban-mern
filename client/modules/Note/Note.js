@@ -14,8 +14,8 @@ class Note extends React.Component {
       <li className={styles.Note}
         id={id}
         style={{
-          // opacity: isDragging ? 0 : 1,
-        }} 
+          opacity: isDragging ? 0 : 1,
+        }}
       >
         {children}
       </li>
@@ -37,6 +37,9 @@ const noteSource = {
   isDragging(props, monitor) {
     return props.id === monitor.getItem().id;
   },
+  endDrag(props, monitor) {
+    document.getElementById(props.id).style.opacity = 1;
+  }
 };
 
 const noteTarget = {

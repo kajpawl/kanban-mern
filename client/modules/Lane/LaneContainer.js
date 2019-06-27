@@ -20,7 +20,7 @@ const mapDispatchToProps = {
 };
 
 const noteTarget = {
-  drop(targetProps, monitor) {
+  hover(targetProps, monitor) {
     const sourceProps = monitor.getItem();
     const { id: noteId, laneId: sourceLaneId } = sourceProps;
     if (!targetProps.lane.notes.includes(noteId)) {
