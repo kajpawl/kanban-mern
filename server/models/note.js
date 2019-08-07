@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const noteSchema = new Schema({
   task: { type: 'String', required: true },
-  description: { type: 'String', required: true },
+  description: { type: 'String', required: false },
   id: { type: 'String', required: true, unique: true },
 });
 
