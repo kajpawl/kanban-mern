@@ -36,10 +36,10 @@ export default class Edit extends Component {
   }
 
   renderEdit = () => {
+    {/* Canceled input property: autoFocus */}
     return (
       <input
         type="text"
-        autoFocus
         defaultValue={this.props.value}
         onBlur={this.finishEdit}
         onKeyPress={this.checkEnter}

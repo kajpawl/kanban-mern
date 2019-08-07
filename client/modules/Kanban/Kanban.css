@@ -1,1 +1,5 @@
 /* Kanban styles */
+
+.App .lanes {
+  white-space: nowrap;
+}

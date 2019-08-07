@@ -12,6 +12,7 @@ export function addNote(req, res) {
 
   const newNote = new Note({
     task: note.task,
+    description: note.description,
   });
 
   newNote.id = uuid();
@@ -53,7 +54,9 @@ export function deleteNote(req, res) {
 
 export function updateNote(req, res) {
   Note.update({ id: req.params.noteId }, req.body).exec((err, note) => {
-        if (err) {
+    console.log(req);
+    console.log(note);
+    if (err) {
       res.status(500).send(err);
     }
     res.json({ note });

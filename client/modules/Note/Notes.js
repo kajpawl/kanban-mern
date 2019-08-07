@@ -15,17 +15,29 @@ const Notes = ({ notes, laneId, editNote, updateNote, deleteNote, moveWithinLane
           moveWithinLane={moveWithinLane}
           laneId={laneId}
         >
-        <Edit
-          editing={note.editing}
-          value={note.task}
-          onValueClick={() => editNote(note.id)}
-          onUpdate={(task) => updateNote({
-            ...note,
-            task,
-            editing: false,
-          })}
-          onDelete={() => deleteNote(note.id, laneId)}
-        />
+          <Edit
+            editing={note.editing}
+            value={note.task}
+            onValueClick={() => editNote(note.id)}
+            onUpdate={(task) => updateNote({
+              ...note,
+              task,
+              editing: false,
+            })}
+            onDelete={() => deleteNote(note.id, laneId)}
+            className="taskEdit"
+          />
+          <Edit
+            editing={note.editing}
+            value={note.description || "-- optional description --"}
+            onValueClick={() => editNote(note.id)}
+            onUpdate={(description) => updateNote({
+              ...note,
+              description,
+              editing: false,
+            })}
+            className="descriptionEdit"
+          />
         </Note>
       )}</ul>
     </div>

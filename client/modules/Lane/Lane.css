@@ -6,7 +6,16 @@
 
 .Lane {
 	padding: 20px;
-	width: 30%;
+	width: 33%;
 	min-height: 100px;
-	margin: 20px;
+  height: 100%;
+	margin: 0;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.Lane span {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
