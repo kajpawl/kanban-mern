@@ -13,7 +13,6 @@ class Lane extends React.Component {
     this.props = props;
   }
 
-
   render() {
     const { connectDragSource, connectDropTarget, isDragging, endDrag, editing, lane, laneNotes, updateLane, addNote, deleteLane, editLane, deleteNote } = this.props;
     const laneId = lane.id;
@@ -61,6 +60,7 @@ const laneSource = {
     console.log('Happening ' + props.id);
     return {
       id: props.id,
+      type: 'lane',
     };
   },
   isDragging(props, monitor) {
@@ -72,29 +72,50 @@ const laneSource = {
   }
 };
 
-const laneTarget = {
-  hover(targetProps, monitor) {
-    // console.log(targetProps);
-    // const sourceProps = monitor.getItem();
-    // if (targetProps.id !== sourceProps.id) {
-    //   targetProps.moveWithinBoard(targetProps.id, sourceProps.id);
-    // };
-  },
+// const laneTarget = {
+//   // hover(targetProps, monitor) {
+//     // console.log(targetProps);
+//     // const sourceProps = monitor.getItem();
+//     // if (targetProps.id !== sourceProps.id) {
+//     //   targetProps.moveWithinBoard(targetProps.id, sourceProps.id);
+//     // };
+//   // },
+//   drop(targetProps, monitor) {
+//     console.log(targetProps);
+//     const sourceProps = monitor.getItem();
+//     i
+//   }
+// };
+
+const noteTarget = {
   drop(targetProps, monitor) {
-    console.log(targetProps);
     const sourceProps = monitor.getItem();
-    if (targetProps.id !== sourceProps.id) {
-      targetProps.moveWithinBoard(targetProps.id, sourceProps.id);
-    };
-  }
+    console.log(targetProps);
+    console.log(sourceProps);
+    const { id: noteId, laneId: sourceLaneId } = sourceProps;
+    if (sourceProps.type === 'note') {
+      if (!targetProps.lane.notes.includes(noteId)) {
+        targetProps.moveBetweenLanes(
+          targetProps.lane.id,
+          noteId,
+          sourceLaneId,
+        );
+      }
+    }
+    else if (sourceProps.type === 'lane') {
+      if (targetProps.id !== sourceProps.id) {
+        targetProps.moveWithinBoard(targetProps.id, sourceProps.id);
+      };
+    }
+  },
 };
 
 export default compose(
-  DragSource(ItemTypes.LANE, laneSource, (connect, monitor) => ({
+  DragSource(ItemTypes.NOTE, laneSource, (connect, monitor) => ({
     connectDragSource: connect.dragSource(),
     isDragging: monitor.isDragging()
   })),
-  DropTarget(ItemTypes.LANE, laneTarget, (connect) => ({
+  DropTarget(ItemTypes.NOTE, (noteTarget), (connect) => ({
     connectDropTarget: connect.dropTarget()
   }))
 )(Lane);

@@ -21,4 +21,7 @@ router.route('/movenote').put(LaneController.moveNotesBetweenLanes);
 // Change order of notes within a line
 router.route('/updateorder').put(LaneController.updateNotesOrder);
 
+// Change order of lanes within the board
+router.route('/movelane').put(LaneController.moveLane);
+
 export default router;

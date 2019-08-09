@@ -89,9 +89,9 @@ export function fetchLanes() {
 
 export function moveBetweenLanes(targetLaneId, noteId, sourceLaneId) {
   moveBetweenLanesRequest(targetLaneId, noteId, sourceLaneId);
-  console.log(targetLaneId);
-  console.log(noteId);
-  console.log(sourceLaneId);
+  // console.log(targetLaneId);
+  // console.log(noteId);
+  // console.log(sourceLaneId);
   return {
     type: MOVE_BETWEEN_LANES,
     targetLaneId,
@@ -101,19 +101,18 @@ export function moveBetweenLanes(targetLaneId, noteId, sourceLaneId) {
 }
 
 export function moveBetweenLanesRequest(targetLaneId, noteId, sourceLaneId) {
-  // return (dispatch) => {
   return callApi('movenote', 'put', { targetLaneId, noteId, sourceLaneId });
-  //   .then(res => {
-  //     dispatch(moveBetweenLanes(targetLaneId, noteId, sourceLaneId));
-  //   });
-  // };
 }
 
 export function moveWithinBoard(laneTargetId, laneSourceId) {
-  // moveWithinLaneRequest(targetId, sourceId);
+  moveWithinBoardRequest(laneTargetId, laneSourceId);
   return {
     type: MOVE_WITHIN_BOARD,
     laneTargetId,
     laneSourceId,
   };
+}
+
+export function moveWithinBoardRequest(laneTargetId, laneSourceId) {
+  return callApi('movelane', 'put', { laneTargetId, laneSourceId });
 }

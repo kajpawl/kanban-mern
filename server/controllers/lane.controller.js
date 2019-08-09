@@ -142,3 +142,24 @@ export function updateNotesOrder(req, res) {
   })
     .then(res.status(200).end());
 }
+
+export function moveLane(req, res) {
+  const { laneTargetId, laneSourceId } = req.body;
+  Lane.findOne({ id: laneTargetId }).exec((err, targetLane) => {
+    Lane.findOne({ id: laneSourceId }).exec((err, sourceLane) => {
+
+
+      if (sourceLane.order < targetLane.order) {
+        sourceLane.order = targetLane.order;
+        targetLane.order = targetLane.order - 1;
+      }
+      else {
+        sourceLane.order = targetLane.order - 1;
+        targetLane.order = targetLane.order;
+      }
+      targetLane.save();
+      sourceLane.save();
+    });
+  })
+    .then(res.status(200).end());
+}
