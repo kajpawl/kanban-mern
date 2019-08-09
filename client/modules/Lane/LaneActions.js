@@ -10,6 +10,7 @@ export const DELETE_LANE = 'DELETE_LANE';
 export const EDIT_LANE = 'EDIT_LANE';
 export const CREATE_LANES = 'CREATE_LANES';
 export const MOVE_BETWEEN_LANES = 'MOVE_BETWEEN_LANES';
+export const MOVE_WITHIN_BOARD = 'MOVE_WITHIN_BOARD';
 
 // Export Actions
 
@@ -88,6 +89,9 @@ export function fetchLanes() {
 
 export function moveBetweenLanes(targetLaneId, noteId, sourceLaneId) {
   moveBetweenLanesRequest(targetLaneId, noteId, sourceLaneId);
+  console.log(targetLaneId);
+  console.log(noteId);
+  console.log(sourceLaneId);
   return {
     type: MOVE_BETWEEN_LANES,
     targetLaneId,
@@ -97,6 +101,19 @@ export function moveBetweenLanes(targetLaneId, noteId, sourceLaneId) {
 }
 
 export function moveBetweenLanesRequest(targetLaneId, noteId, sourceLaneId) {
+  // return (dispatch) => {
   return callApi('movenote', 'put', { targetLaneId, noteId, sourceLaneId });
+  //   .then(res => {
+  //     dispatch(moveBetweenLanes(targetLaneId, noteId, sourceLaneId));
+  //   });
+  // };
 }
 
+export function moveWithinBoard(laneTargetId, laneSourceId) {
+  // moveWithinLaneRequest(targetId, sourceId);
+  return {
+    type: MOVE_WITHIN_BOARD,
+    laneTargetId,
+    laneSourceId,
+  };
+}

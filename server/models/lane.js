@@ -6,6 +6,7 @@ const laneSchema = new Schema({
 	name: { type: 'String', required: true },
 	notes: [{ type: Schema.ObjectId, ref: 'Note', required: true }],
 	id: { type: 'String', required: true, unique: true },
+  order: { type: 'Number', required: false },
 });
 
 function populateNotes(next) {
