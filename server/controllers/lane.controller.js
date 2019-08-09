@@ -88,17 +88,17 @@ export function updateLane(req, res) {
 }
 
 export function moveNotesBetweenLanes(req, res) {
-  console.log('moveNotesBetweenLanes');
-  console.log(req.body);
+  // console.log('moveNotesBetweenLanes');
+  // console.log(req.body);
   const { targetLaneId, noteId, sourceLaneId } = req.body;
-  console.log(req.body);
-  console.log(targetLaneId);
-  console.log(noteId);
+  // console.log(req.body);
+  // console.log(targetLaneId);
+  // console.log(noteId);
   console.log(sourceLaneId);
   Note.findOne({ id: noteId }).exec((err, movedNote) => {
     Lane.findOne({ id: sourceLaneId }).exec((err, sourceLane) => {
-      console.log(sourceLane);
-      console.log(movedNote);
+      // console.log(sourceLane);
+      // console.log(movedNote);
       sourceLane.notes.pull(movedNote);
       sourceLane.save();
     })
@@ -114,29 +114,32 @@ export function moveNotesBetweenLanes(req, res) {
 
 export function updateNotesOrder(req, res) {
   const { laneId, targetId, sourceId } = req.body;
-  Lane.findOne({ id: laneId }).exec((err, lane) => {
-    Note.findOne({ id: targetId }).exec((err, targetNote) => {
-      Note.findOne({ id: sourceId }).exec((err, sourceNote) => {
-        let newNotes = [];
-        // console.log(lane);
-        // console.log(targetNote);
-        // console.log(sourceNote);
-        // console.log(lane.notes.length);
-        for (let i = 0; i < lane.notes.length; i++) {
-          console.log('iterating');
-          if (lane.notes[i].id == targetId) {
-            newNotes.push(sourceNote, lane.notes[i]);
-          }
-          else if (lane.notes[i].id == sourceId) {
-            console.log('Here is the moved note');
-          }
-          else {
-            newNotes.push(lane.notes[i]);
-          }
-        };
-        // console.log('\n\n\n' + newNotes + '\n\n\n');
-        lane.notes = newNotes;
-        lane.save();
+  Note.findOne({ id: targetId }).exec((err, targetNote) => {
+    Note.findOne({ id: sourceId }).exec((err, sourceNote) => {
+      Lane.findOne({ id: laneId }).exec((err, lane) => {
+        if (lane.notes.some(note => note.id === sourceId)) {
+          // console.log('lane includes this note')
+          let newNotes = [];
+          // console.log(lane);
+          // console.log(targetNote);
+          // console.log(sourceNote);
+          // console.log(lane.notes.length);
+          for (let i = 0; i < lane.notes.length; i++) {
+            console.log('iterating');
+            if (lane.notes[i].id == targetId) {
+              newNotes.push(sourceNote, lane.notes[i]);
+            }
+            else if (lane.notes[i].id == sourceId) {
+              null;
+            }
+            else {
+              newNotes.push(lane.notes[i]);
+            }
+          };
+          // console.log('\n\n\n' + newNotes + '\n\n\n');
+          lane.notes = newNotes;
+          lane.save();
+        }
       });
     });
   })
@@ -147,7 +150,6 @@ export function moveLane(req, res) {
   const { laneTargetId, laneSourceId } = req.body;
   Lane.findOne({ id: laneTargetId }).exec((err, targetLane) => {
     Lane.findOne({ id: laneSourceId }).exec((err, sourceLane) => {
-
 
       if (sourceLane.order < targetLane.order) {
         sourceLane.order = targetLane.order;

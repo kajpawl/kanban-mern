@@ -71,7 +71,7 @@ export function createNotes(notesData) {
 }
 
 export function moveWithinLane(laneId, targetId, sourceId) {
-  // moveWithinLaneRequest(laneId, targetId, sourceId);
+  moveWithinLaneRequest(laneId, targetId, sourceId);
   return {
     type: MOVE_WITHIN_LANE,
     laneId,

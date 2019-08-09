@@ -4,7 +4,7 @@ import uuid from 'uuid';
 
 export function addNote(req, res) {
   const { note, laneId } = req.body;
-  console.log(`Server: note.controller.js - add note ${note.task} and laneId ${laneId}`)
+  // console.log(`Server: note.controller.js - add note ${note.task} and laneId ${laneId}`)
 
   if (!note || !note.task || !laneId) {
     res.status(400).end();
@@ -54,8 +54,8 @@ export function deleteNote(req, res) {
 
 export function updateNote(req, res) {
   Note.update({ id: req.params.noteId }, req.body).exec((err, note) => {
-    console.log(req);
-    console.log(note);
+    // console.log(req);
+    // console.log(note);
     if (err) {
       res.status(500).send(err);
     }
