@@ -36,7 +36,7 @@ export class App extends Component {
         <div>
           <Helmet
             title="MERN Kanban Board"
-            titleTemplate="%s - Kanban Board"
+            titleTemplate="%s - Manage your tasks easily"
             meta={[
               { charset: 'utf-8' },
               {

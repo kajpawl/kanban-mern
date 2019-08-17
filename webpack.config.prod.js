@@ -76,7 +76,7 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.jsx*$/,
+        test: /\.js*$/,
         exclude: /node_modules/,
         use: 'babel-loader',
       },
@@ -116,6 +116,6 @@ module.exports = {
       filename: "chunk-manifest.json",
       manifestVariable: "webpackManifest",
     }),
-    new webpack.optimize.UglifyJsPlugin(),
+    // new webpack.optimize.UglifyJsPlugin(),
   ],
 };

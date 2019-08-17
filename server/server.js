@@ -94,7 +94,7 @@ const renderFullPage = (html, initialState) => {
 
         ${isProdMode ? `<link rel='stylesheet' href='${assetsManifest['/app.css']}' />` : ''}
         <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'/>
-        <link rel="shortcut icon" href="http://res.cloudinary.com/hashnode/image/upload/v1455629445/static_imgs/mern/mern-favicon-circle-fill.png" type="image/png" />
+        <link rel="shortcut icon" href="https://previews.dropbox.com/p/thumb/AAhyOUVkfO6epv3L3Ps0gd123yiT1HHkYLynFOBSHnZn6DMBX7k5PCCe-Zdmt2Vo_osnosfxp99B50eEuHiuDExQ_cW1zBTbGWknjgsCHyExyvnQ-s3l30Ak38PgVCt4N6fFqNdxgL89nvRta5st_YKyRnXxls5kqPOo6bGwsc2a8Jzzr7zaoCOB9xdSbGxG47vBsCmNiEEjticW-mNroo0SM8oJzi2SXgCbPdxNBZmKVK9Y8h3WsizAl8V4oTW4AT2VJFU7lf5ZuwLB8i96ex5PpdqlTb4zsp0udYYwxhYqLvEBO5k8beI8e21es2iMhYe4WZj7YqrR7BjhsZlI6hrL/p.png" type="image/png" />
       </head>
       <body>
         <div id="root">${process.env.NODE_ENV === 'production' ? html : `<div>${html}</div>`}</div>
