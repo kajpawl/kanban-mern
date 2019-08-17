@@ -1,24 +1,182 @@
 /* Lane styles */
 
 .AddLane {
-  color: #000;
+  background-color: #F8911B;
+  border-radius: 50%;
+  border: none;
+  width: 76px;
+  height: 76px;
+  font-size: 56px;
+  color: #fff;
+  position: fixed;
+  top: calc(50% - 38px);
+  right: 50px;
+  box-shadow: 0 3px 12px -5px rgba(0,0,0,.8);
+  transition: .2s;
+  cursor: pointer;
+  z-index: 999;
 }
 
+.AddLane:hover {
+  background-color: #eb891a;
+  top: calc(50% - 41px);
+  box-shadow: 0 7px 12px -5px rgba(0,0,0,.6);
+}
+
+
 .Lane {
-	padding: 20px;
-	width: 33%;
-	min-height: 100px;
-  height: 100%;
-	margin: 0;
+  position: relative;
+  box-sizing: border-box;
+  border: 7px solid #fff;
+	margin: 4px 7px;
+	width: 100%;
+	min-width: 340px;
+  height: calc(100vh - 296px);
   display: inline-block;
   vertical-align: top;
   order: 0;
   flex: 0 1 auto;
   align-self: auto;
+  box-shadow: 0 2px 7px -5px rgba(0,0,0,.1);
+  transition: .3s;
+  border-radius: 2px;
+}
+
+.Lane:hover {
+  box-shadow: 0 3px 8px -5px rgba(0,0,0,.3);
+  transform: translateY(-3px);
+}
+
+.Lane .LaneHeader,
+.Lane .LaneFooter {
+  background: #fff;
+  line-height: 60px;
+}
+
+.Lane .LaneHeader {
+  cursor: grab;
+}
+
+.Lane .LaneHeader::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+
+.Lane .LaneHeader span {
+  line-height: 60px;
+  cursor: default;
+}
+
+.Lane:nth-child(4n) .LaneHeader .LaneName span {
+  color: #5CC188;
+}
+
+.Lane:nth-child(4n + 1) .LaneHeader .LaneName span {
+  color: #EF897E;
+}
+
+.Lane:nth-child(4n + 2) .LaneHeader .LaneName span {
+  color: #84ACD5;
+}
+
+.Lane:nth-child(4n + 3) .LaneHeader .LaneName span {
+  color: #F8AD52;
+}
+
+.Lane .LaneFooter {
+  position: absolute;
+  bottom: 0;
+  height: 60px;
+  width: 100%;
+  transition: .2s;
+}
+
+.Lane .LaneFooter .LaneDelete button {
+  line-height: 28px;
+  float: right;
+  margin: 16px 15px;
+  padding: 0 15px;
+  height: 32px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  background-color: #fff;
+  transition: .2s;
+  font-size: 34px;
+  color: #e5e5e5;
+  border-radius: 16px;
+  border: 2px solid #e5e5e5;
+  font-size: 16px;
+}
+
+.Lane:hover .LaneFooter .LaneDelete button {
+  border-color: #ccc;
+  color: #ccc;
+}
+
+.Lane .LaneFooter .LaneDelete button:hover {
+  border-color: #a3a3a3;
+  color: #a3a3a3;
 }
 
 .Lane span {
   font-size: 18px;
   font-weight: 600;
   letter-spacing: 1px;
+}
+
+.Lane .LaneName span {
+  margin-left: 10px;
+  font-size: 22px;
+}
+
+.Lane .LaneAddNote {
+  float: right;
+  vertical-align: middle;
+}
+
+.Lane .LaneAddNote .NotesLength {
+  vertical-align: top;
+  margin: 15px 0;
+  color: #999;
+}
+
+.Lane .LaneAddNote button {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  background-color: #ddd;
+  transition: .2s;
+  font-size: 34px;
+  color: #fff;
+  border-radius: 50%;
+  line-height: 30px;
+  margin: 15px;
+}
+
+.Lane:hover .LaneAddNote button {
+  background-color: #a3a3a3;
+}
+
+.Lane .LaneAddNote button:hover {
+  background-color: #777;
+}
+
+.Lane input {
+  font-size: 18px;
+  /*height: 22px;*/
+  border-radius: 3px;
+  padding: 4px 8px;
+  width: 230px;
+  margin: 10px;
+  border: 2px solid #ccc;
+  transition: .2s;
+}
+
+.Lane input:hover,
+.Lane input:active {
+  border: 2px solid #777;  
 }

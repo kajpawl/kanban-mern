@@ -1,14 +1,25 @@
 .header {
+  position: relative;
+}
+
+.header .background {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   background: #eee url('../../header-bk.png') center;
   background-size: cover;
   border-bottom: 1px solid #ccc;
+  filter: brightness(.7);
+  z-index: -1;
 }
 
 .content {
   width: 100%;
   max-width: 980px;
   margin: auto;
-  padding: 64px 16px;
+  padding: 41px 16px;
   overflow: auto;
 }
 
@@ -16,44 +27,7 @@
   font-weight: 300;
   font-size: 42px;
   float: left;
-}
-
-.site-title a {
-  text-decoration: none;
   color: #FFF;
-}
-
-.add-post-button {
-  display: inline-block;
-  color: #FFF;
-  background: #03A9F4;
-  padding: 8px 16px;
-  text-decoration: none;
-  border-radius: 1000px;
-  float: right;
-}
-
-.language-switcher {
-  background: rgba(0, 0, 0, 0.1);
-}
-
-.language-switcher ul {
-  list-style: none;
-  width: 980px;
-  margin: auto;
-  text-align: right;
-}
-
-.language-switcher li {
-  display: inline-block;
-  margin: 10px;
-  padding: 5px;
-  cursor: pointer;
-  color: #fff;
-}
-
-.language-switcher li:first-child {
-  color: rgba(255, 255, 255, 0.7);
 }
 
 .selected {
@@ -61,8 +35,5 @@
 }
 
 @media (max-width: 767px){
-  .add-post-button{
-    float: left;
-    margin-top: 16px;
-  }
+
 }

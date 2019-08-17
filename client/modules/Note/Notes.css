@@ -1,5 +1,13 @@
+.NotesContainer {
+  overflow-y: auto;
+  max-height: 100%;
+  height: calc(100vh - 430px);
+  border: 2px solid transparent;
+}
+
 .Notes {
 	color: #000;
+  padding: 0 8px;
 }
 
 .Notes ul {
@@ -9,19 +17,76 @@
 
 .Notes li {
   display: block;
-  background-color: #f5f5f5;
-  padding: 20px 25px;
-  margin: 5px auto;
-  border-radius: 4px;
-  width: 95%;
+  background-color: #fff;
+  padding: 30px 17px 15px;
+  margin: 12px auto;
+  border-radius: 2px;
+  width: 100%;
+  transition: .3s;
+  position: relative;
+  cursor: grab;
+  overflow: hidden;
 }
 
 .Notes li span {
   font-weight: 500;
+  cursor: default;
+  white-space: pre-wrap;
+}
+.Notes li .NoteName span {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+.Notes li .NoteDescription span {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.25em;
 }
 
 .Notes li button {
   float: right;
   width: 22px;
   height: 22px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: #a3a3a3;
+  transition: .2s;
+  font-size: 15px;
+}
+
+.Notes li button:hover {
+  color: #666;
+}
+
+.Notes li:hover {
+  box-shadow: 0 2px 5px 0px rgba(0,0,0,.1);
+}
+
+.Notes li:before {
+  position: absolute;
+  content: '';
+  background-color: #27AE52;
+  width: 45px;
+  height: 7px;
+  border-radius: 2px;
+  top: 13px;
+}
+
+.Notes li input {
+  font-size: 16px;
+  border-radius: 2px;
+  padding: 2px 10px;
+  margin: 2px 3px;
+  width: calc(100% - 6px);
+  transition: .2s;
+}
+
+.Notes li input:hover,
+.Notes li input:active {
+  border: 2px solid #777;  
 }

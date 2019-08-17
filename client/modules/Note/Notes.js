@@ -7,7 +7,7 @@ import styles from './Notes.css';
 const Notes = ({ notes, laneId, editNote, updateNote, deleteNote, moveWithinLane }) => {
 
   return (
-    <div>
+    <div className={styles.NotesContainer}>
       <ul className={styles.Notes}>{notes.map(note =>
         <Note 
           id={note.id}
@@ -25,7 +25,7 @@ const Notes = ({ notes, laneId, editNote, updateNote, deleteNote, moveWithinLane
               editing: false,
             })}
             onDelete={() => deleteNote(note.id, laneId)}
-            className="taskEdit"
+            className={styles.NoteName}
           />
           <Edit
             editing={note.editing}
@@ -36,7 +36,7 @@ const Notes = ({ notes, laneId, editNote, updateNote, deleteNote, moveWithinLane
               description,
               editing: false,
             })}
-            className="descriptionEdit"
+            className={styles.NoteDescription}
           />
         </Note>
       )}</ul>

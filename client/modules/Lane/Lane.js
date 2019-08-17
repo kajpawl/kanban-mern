@@ -25,7 +25,8 @@ class Lane extends React.Component {
       <div className={styles.Lane} style={{order: `${lane.order}`}}>
         <div className={styles.LaneHeader}>
           <div className={styles.LaneAddNote}>
-            <button onClick={() => addNote({task: insertNoteTask()}, laneId)}>Add Note</button>
+            <span className={styles.NotesLength}>{laneNotes.length}</span>
+            <button onClick={() => addNote({task: insertNoteTask()}, laneId)}>+</button>
           </div>
           <Edit
             className={styles.LaneName}
@@ -34,14 +35,16 @@ class Lane extends React.Component {
             onValueClick={() => editLane(lane.id)}
             onUpdate={name => updateLane({ ...lane, name, editing: false })}
           />
-          <div className={styles.LaneDelete}>
-            <button onClick={() => deleteLane(laneId)}>Remove Lane</button>
-          </div>
         </div>
         <NotesContainer
           notes={laneNotes}
           laneId={laneId}
         />
+        <div className={styles.LaneFooter}>
+          <div className={styles.LaneDelete}>
+            <button onClick={() => deleteLane(laneId)}>&#x2718; Delete lane</button>
+          </div>
+        </div>
       </div>
     ));
   }
@@ -88,10 +91,30 @@ const laneSource = {
 // };
 
 const noteTarget = {
+  // hover(targetProps, monitor) {
+  //   const sourceProps = monitor.getItem();
+  //   // console.log(targetProps);
+  //   // console.log(sourceProps);
+  //   const { id: noteId, laneId: sourceLaneId } = sourceProps;
+  //   if (sourceProps.type === 'note') {
+  //     if (!targetProps.lane.notes.includes(noteId)) {
+  //       targetProps.moveBetweenLanes(
+  //         targetProps.lane.id,
+  //         noteId,
+  //         sourceLaneId,
+  //       );
+  //     }
+  //   }
+  //   // else if (sourceProps.type === 'lane') {
+  //   //   if (targetProps.id !== sourceProps.id) {
+  //   //     targetProps.moveWithinBoard(targetProps.id, sourceProps.id);
+  //   //   };
+  //   // }
+  // },
   drop(targetProps, monitor) {
     const sourceProps = monitor.getItem();
-    console.log(targetProps);
-    console.log(sourceProps);
+    // console.log(targetProps);
+    // console.log(sourceProps);
     const { id: noteId, laneId: sourceLaneId } = sourceProps;
     if (sourceProps.type === 'note') {
       if (!targetProps.lane.notes.includes(noteId)) {
@@ -102,7 +125,8 @@ const noteTarget = {
         );
       }
     }
-    else if (sourceProps.type === 'lane') {
+    else 
+    if (sourceProps.type === 'lane') {
       if (targetProps.id !== sourceProps.id) {
         targetProps.moveWithinBoard(targetProps.id, sourceProps.id);
       };

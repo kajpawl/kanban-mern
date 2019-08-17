@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import InfoMenu from '../InfoMenu/InfoMenu';
 import Lanes from '../Lane/Lanes';
 import { createLaneRequest, createLane, fetchLanes } from '../Lane/LaneActions';
 import styles from '../Lane/Lane.css';
@@ -15,12 +16,13 @@ const Kanban = props => {
 
   return (
     <div>
+      <InfoMenu />
       <button
         className={styles.AddLane}
         onClick={() => props.createLaneRequest(
           { name: insertLaneName() }
         )}
-      >Add Lane</button>
+      >+</button>
       <Lanes lanes={props.lanes} />
     </div>
   );

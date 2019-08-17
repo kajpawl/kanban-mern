@@ -20,7 +20,7 @@ export default class Edit extends Component {
     return (
       <button className={styles.delete} 
         onClick={() => {this.props.onDelete()}
-        }>x
+        }>&#x2716;
       </button>
     );
   }

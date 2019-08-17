@@ -1,5 +1,9 @@
 /* Kanban styles */
 
+.App {
+  background-color: #f5f5f5;
+}
+
 .App .lanes {
   white-space: nowrap;
 }

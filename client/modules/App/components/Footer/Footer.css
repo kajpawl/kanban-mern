@@ -1,17 +1,29 @@
-.footer{
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
   text-align: center;
-  padding: 56px 0;
+  padding: 40px 0;
   background-size: cover;
 }
 
-.footer p{
-  margin: 0 0 8px 0;
-  font-size: 14px;
-  color: #FFF;
+.footer .background {
+  position: fixed;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background-size: cover;
+  border-bottom: 1px solid #ccc;
+  filter: brightness(.6);
+  z-index: -1;
 }
 
-.footer a{
+.footer a {
+  font-size: 14px;
   color: #FFF;
   text-decoration: none;
-  font-weight: 700;
+  font-weight: 300;
+  letter-spacing: 1px;
 }
