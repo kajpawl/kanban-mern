@@ -23,7 +23,6 @@
   box-shadow: 0 7px 12px -5px rgba(0,0,0,.6);
 }
 
-
 .Lane {
   position: relative;
   box-sizing: border-box;
@@ -167,7 +166,6 @@
 
 .Lane input {
   font-size: 18px;
-  /*height: 22px;*/
   border-radius: 3px;
   padding: 4px 8px;
   width: 230px;

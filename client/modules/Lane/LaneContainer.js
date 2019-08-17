@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import { DropTarget } from 'react-dnd';
 import ItemTypes from '../Kanban/itemTypes';
 import Lane from './Lane';
-import { moveBetweenLanes, moveBetweenLanesRequest, moveWithinBoard, createLane, fetchLanes, deleteLane, deleteLaneRequest, updateLane, updateLaneRequest, editLane } from './LaneActions';
+import { moveBetweenLanes, moveWithinBoard, createLane, fetchLanes, deleteLane, deleteLaneRequest, updateLane, updateLaneRequest, editLane } from './LaneActions';
 import { createNote, createNoteRequest, deleteNote, deleteNoteRequest } from '../Note/NoteActions';
 
 const mapStateToProps = (state, ownProps) => ({
@@ -12,7 +12,6 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = {
   moveBetweenLanes,
-  moveBetweenLanesRequest,
   moveWithinBoard,
   editLane,
   deleteLane: deleteLaneRequest,

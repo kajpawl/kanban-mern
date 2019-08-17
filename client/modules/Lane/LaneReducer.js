@@ -28,7 +28,6 @@ export default function lanes(state = initialState, action) {
       return { ...action.lanes };
 
     case DELETE_NOTE: {
-      console.log(action);
       const newLane = { ...state[action.laneId] };
       newLane.notes = newLane.notes.filter(noteId => noteId !== action.noteId);
       return { ...state, [action.laneId]: newLane };
@@ -45,16 +44,12 @@ export default function lanes(state = initialState, action) {
     }
 
     case MOVE_WITHIN_LANE: {
-      console.log(action);
       const newLane = { ...state[action.laneId] };
       newLane.notes = moveNotes(newLane.notes, action.sourceId, action.targetId);
       return { ...state, [action.laneId]: newLane };
     }
 
     case MOVE_BETWEEN_LANES: {
-      // console.log(action.noteId);
-      // console.log(action.targetLaneId);
-      // console.log(action.sourceLaneId)
       let targetLane = { ...state[action.targetLaneId] };
       targetLane.notes = [ ...targetLane.notes, action.noteId ];
 

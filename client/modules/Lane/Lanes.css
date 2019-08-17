@@ -13,3 +13,18 @@
   align-items: flex-start;
   padding: 15px 15px 24px;
 }
+
+.Lanes .paddingKeeper {
+  height: calc(100vh - 296px);
+  min-width: 15px;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  -ms-flex-order: 99999999999;
+  order: 99999999999;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  -ms-flex-item-align: auto;
+  -ms-grid-row-align: auto;
+  align-self: auto;
+}

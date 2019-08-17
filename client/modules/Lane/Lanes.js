@@ -9,6 +9,7 @@ const Lanes = ({ lanes }) => {
       {lanes.map(lane =>
         <Lane className="lane" id={lane.id} key={lane.id} lane={lane} order={lane.order} />
       )}
+      <div className={styles.paddingKeeper} />
     </div>
   );
 };

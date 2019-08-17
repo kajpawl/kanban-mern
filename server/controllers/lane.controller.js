@@ -12,16 +12,11 @@ export function addLane(req, res) {
   newLane.notes = [];
   newLane.id = uuid();
   newLane.order = 1;
-  // console.log(Lane.find().sort({ order: -1 }).limit(1));
   Lane.find().exec((err, lanes) => {
     if (lanes.length) {
       
       Lane.find().sort({order:-1}).limit(1).exec((err, lane) => {
-
-        console.log(lane);
-        console.log(lane[0].order);
         newLane.order = ++lane[0].order;
-
         newLane.save((err, saved) => {
           if (err) {
             res.status(500).send(err);
@@ -59,7 +54,6 @@ export function deleteLane(req, res) {
     lane.notes.map(note => {
       return Note.findOneAndRemove({ id: note.id }, function(err) {
         if (err) throw err;
-        // console.log('Note deleted!');
       });
     });
 
@@ -70,15 +64,6 @@ export function deleteLane(req, res) {
 }
 
 export function updateLane(req, res) {
-  // Lane.findOne({ id: req.params.laneId }).exec((err, lane) => {
-  //   if (err) {
-  //     res.status(500).send(err);
-  //   }
-
-  //   const newName = req.body.name;
-  //   lane.name = newName;
-  // })
-  // console.log('Lane updated');
   Lane.update({ id: req.params.laneId }, req.body).exec((err, lane) => {
     if (err) {
       res.status(500).send(err);
@@ -88,22 +73,15 @@ export function updateLane(req, res) {
 }
 
 export function moveNotesBetweenLanes(req, res) {
-  // console.log('moveNotesBetweenLanes');
-  // console.log(req.body);
+
   const { targetLaneId, noteId, sourceLaneId } = req.body;
-  // console.log(req.body);
-  // console.log(targetLaneId);
-  // console.log(noteId);
-  console.log(sourceLaneId);
+
   Note.findOne({ id: noteId }).exec((err, movedNote) => {
     Lane.findOne({ id: sourceLaneId }).exec((err, sourceLane) => {
-      // console.log(sourceLane);
-      // console.log(movedNote);
       sourceLane.notes.pull(movedNote);
       sourceLane.save();
     })
       .then(Lane.findOne({ id: targetLaneId }).exec((err, targetLane) => {
-        console.log(targetLane);
         targetLane.notes.push(movedNote);
         targetLane.save();
       }))
@@ -114,18 +92,14 @@ export function moveNotesBetweenLanes(req, res) {
 
 export function updateNotesOrder(req, res) {
   const { laneId, targetId, sourceId } = req.body;
+
   Note.findOne({ id: targetId }).exec((err, targetNote) => {
     Note.findOne({ id: sourceId }).exec((err, sourceNote) => {
       Lane.findOne({ id: laneId }).exec((err, lane) => {
+
         if (lane.notes.some(note => note.id === sourceId)) {
-          // console.log('lane includes this note')
           let newNotes = [];
-          // console.log(lane);
-          // console.log(targetNote);
-          // console.log(sourceNote);
-          // console.log(lane.notes.length);
           for (let i = 0; i < lane.notes.length; i++) {
-            console.log('iterating');
             if (lane.notes[i].id == targetId) {
               newNotes.push(sourceNote, lane.notes[i]);
             }
@@ -136,7 +110,6 @@ export function updateNotesOrder(req, res) {
               newNotes.push(lane.notes[i]);
             }
           };
-          // console.log('\n\n\n' + newNotes + '\n\n\n');
           lane.notes = newNotes;
           lane.save();
         }
@@ -148,6 +121,7 @@ export function updateNotesOrder(req, res) {
 
 export function moveLane(req, res) {
   const { laneTargetId, laneSourceId } = req.body;
+  
   Lane.findOne({ id: laneTargetId }).exec((err, targetLane) => {
     Lane.findOne({ id: laneSourceId }).exec((err, sourceLane) => {
 

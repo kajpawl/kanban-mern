@@ -60,7 +60,6 @@ Lane.propTypes = {
 
 const laneSource = {
   beginDrag(props) {
-    console.log('Happening ' + props.id);
     return {
       id: props.id,
       type: 'lane',
@@ -68,53 +67,12 @@ const laneSource = {
   },
   isDragging(props, monitor) {
     return props.id === monitor.getItem().id;
-  },
-  endDrag(props, monitor) {
-    // console.log(props);
-    // document.getElementById(props.id).style.opacity = 1;
   }
 };
 
-// const laneTarget = {
-//   // hover(targetProps, monitor) {
-//     // console.log(targetProps);
-//     // const sourceProps = monitor.getItem();
-//     // if (targetProps.id !== sourceProps.id) {
-//     //   targetProps.moveWithinBoard(targetProps.id, sourceProps.id);
-//     // };
-//   // },
-//   drop(targetProps, monitor) {
-//     console.log(targetProps);
-//     const sourceProps = monitor.getItem();
-//     i
-//   }
-// };
-
 const noteTarget = {
-  // hover(targetProps, monitor) {
-  //   const sourceProps = monitor.getItem();
-  //   // console.log(targetProps);
-  //   // console.log(sourceProps);
-  //   const { id: noteId, laneId: sourceLaneId } = sourceProps;
-  //   if (sourceProps.type === 'note') {
-  //     if (!targetProps.lane.notes.includes(noteId)) {
-  //       targetProps.moveBetweenLanes(
-  //         targetProps.lane.id,
-  //         noteId,
-  //         sourceLaneId,
-  //       );
-  //     }
-  //   }
-  //   // else if (sourceProps.type === 'lane') {
-  //   //   if (targetProps.id !== sourceProps.id) {
-  //   //     targetProps.moveWithinBoard(targetProps.id, sourceProps.id);
-  //   //   };
-  //   // }
-  // },
   drop(targetProps, monitor) {
     const sourceProps = monitor.getItem();
-    // console.log(targetProps);
-    // console.log(sourceProps);
     const { id: noteId, laneId: sourceLaneId } = sourceProps;
     if (sourceProps.type === 'note') {
       if (!targetProps.lane.notes.includes(noteId)) {

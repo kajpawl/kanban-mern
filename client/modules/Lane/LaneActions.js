@@ -89,9 +89,6 @@ export function fetchLanes() {
 
 export function moveBetweenLanes(targetLaneId, noteId, sourceLaneId) {
   moveBetweenLanesRequest(targetLaneId, noteId, sourceLaneId);
-  // console.log(targetLaneId);
-  // console.log(noteId);
-  // console.log(sourceLaneId);
   return {
     type: MOVE_BETWEEN_LANES,
     targetLaneId,
