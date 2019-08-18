@@ -18,7 +18,6 @@ export default function notes(state = initialState, action) {
     }
 
     case DELETE_NOTE:
-      console.log(action);
       return omit(state, action.noteId);
 
     case CREATE_NOTES:

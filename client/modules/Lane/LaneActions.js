@@ -6,8 +6,9 @@ import { normalize } from 'normalizr';
 // Export Constants
 export const CREATE_LANE = 'CREATE_LANE';
 export const UPDATE_LANE = 'UPDATE_LANE';
-export const DELETE_LANE = 'DELETE_LANE';
 export const EDIT_LANE = 'EDIT_LANE';
+export const DELETE_LANE = 'DELETE_LANE';
+export const REMOVE_NOTE_FROM_LANE = 'REMOVE_NOTE_FROM_LANE';
 export const CREATE_LANES = 'CREATE_LANES';
 export const MOVE_BETWEEN_LANES = 'MOVE_BETWEEN_LANES';
 export const MOVE_WITHIN_BOARD = 'MOVE_WITHIN_BOARD';
@@ -68,6 +69,14 @@ export function deleteLane(laneId) {
   };
 }
 
+export function removeNoteFromLane(noteId, laneId) {
+  return {
+    type: REMOVE_NOTE_FROM_LANE,
+    noteId,
+    laneId,
+  };
+}
+
 export function deleteLaneRequest(laneId) {
   return (dispatch) => {
     return callApi(`lanes/${laneId}`, 'delete').then(() => {
@@ -113,3 +122,4 @@ export function moveWithinBoard(laneTargetId, laneSourceId) {
 export function moveWithinBoardRequest(laneTargetId, laneSourceId) {
   return callApi('movelane', 'put', { laneTargetId, laneSourceId });
 }
+

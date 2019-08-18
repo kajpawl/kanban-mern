@@ -1,4 +1,5 @@
 import callApi from '../../util/apiCaller';
+import { removeNoteFromLane } from '../Lane/LaneActions';
 
 // Export Constants
 export const CREATE_NOTE = 'CREATE_NOTE';
@@ -51,6 +52,7 @@ export function deleteNote(noteId, laneId) {
 export function deleteNoteRequest(noteId, laneId) {
   return (dispatch) => {
     return callApi('notes/' + noteId, 'delete', { noteId, laneId }).then(() => {
+      dispatch(removeNoteFromLane(noteId, laneId));
       dispatch(deleteNote(noteId, laneId));
     });
   };
